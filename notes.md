@@ -43,9 +43,13 @@ finally also it highlighted that react has been split into two modules:
 
 - React.render(React.createElement(App), document.body)
     + note any DOM element can be passed instead of document.body
-    + 
+    + can pass an element like <App/> instead of create element as argument
 
-##UP TO: 1.3 BACK TO WORK [here](https://www.safaribooksonline.com/library/view/reactjs-by-example/9781785289644/ch01s05.html)
+###JSX
+- can insert dynamic variables into jsx using {}, where it refers to an a javascript object with name nameA in {nameA}.
+- leads us to simply define reuseable components an dpopulate with info. see commit [here](https://github.com/condnsdmatters/react-tutorial-playground/commit/785ca877d88055b628cc0ef1c61d2068df3bf4b5)
+
+##UP TO: 1.3 BACK TO WORK [here](https://www.safaribooksonline.com/library/view/reactjs-by-example/9781785289644/ch01s05.htmlb)
 
 
 
