@@ -48,8 +48,14 @@ finally also it highlighted that react has been split into two modules:
 ###JSX
 - can insert dynamic variables into jsx using {}, where it refers to an a javascript object with name nameA in {nameA}.
 - leads us to simply define reuseable components an dpopulate with info. see commit [here](https://github.com/condnsdmatters/react-tutorial-playground/commit/785ca877d88055b628cc0ef1c61d2068df3bf4b5)
+- jsx components start w Upper Case (`<App/>`) html starts lower case (`<h1>`). thats how internally distinguishes
+- also: as jsx based on xml, can have self closing tags (see above). all tags must be closed.
+- if you put components into another one they appear in this.props.children `<Custom1><CustomChild1/><CustomChild2></Custom1>` 
+- You can name space components this way: Custom1.CustomChild1 = React.createClass, etc
+- Can use ... operator to unpack objects as attributes in tags eg `var props = {a:1, b:2}` then `<Custom {...props}>`. These are called spread attributes and are ES6 standard
+- 
 
-##UP TO: 1.3 BACK TO WORK [here](https://www.safaribooksonline.com/library/view/reactjs-by-example/9781785289644/ch01s05.htmlb)
+##UP TO: 2.9 Styles in JSX [here](https://www.safaribooksonline.com/library/view/reactjs-by-example/9781785289644/ch01s05.htmlb)
 
 
 

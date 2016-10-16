@@ -48,7 +48,15 @@ console.log("Starting the tutorial...");
 //       }
 //   });
 
-var Heading = React.createClass(
+var RecentChangesTable = React.createClass(
+  {
+    render: function()
+    {
+      return(<table  className='table'>{this.props.children}</table>);
+    }
+  });
+
+RecentChangesTable.Heading = React.createClass(
   {
     render: function()
     {
@@ -56,20 +64,20 @@ var Heading = React.createClass(
     }
   });
 
-var Headings = React.createClass(
+RecentChangesTable.Headings = React.createClass(
   {
     render: function() 
     {
       var headings = this.props.headings.map(function(heading)
         {
-          return <Heading heading={heading}/>
+          return <RecentChangesTable.Heading heading={heading}/>
         });
       
       return(<thead><tr>{headings}</tr></thead>);
     }
   });
 
-var Row = React.createClass(
+RecentChangesTable.Row = React.createClass(
   {
     render: function()
     {
@@ -81,13 +89,13 @@ var Row = React.createClass(
     } 
   });
 
-var Rows = React.createClass(
+RecentChangesTable.Rows = React.createClass(
   {
     render: function()
     {
       var rows = this.props.changeSets.map(function(changeSet)
         {
-          return (<Row changeSet={changeSet}/>);
+          return (<RecentChangesTable.Row changeSet={changeSet}/>);
         });
 
       return(<tbody>{rows}</tbody>);
@@ -102,6 +110,7 @@ var Title = React.createClass(
     }
   });
 
+
 var ComponentApp = React.createClass(
   {
     render: function()
@@ -110,10 +119,10 @@ var ComponentApp = React.createClass(
       return( <div>
                 {/* a comment goes here */}
                 <Title title={this.props.title} />
-                <table className='table'>
-                  <Headings headings = {this.props.headings}/>
-                  <Rows changeSets = {this.props.changeSets}/>
-                </table>
+                <RecentChangesTable>
+                  <RecentChangesTable.Headings headings = {this.props.headings}/>
+                  <RecentChangesTable.Rows changeSets = {this.props.changeSets}/>
+                </RecentChangesTable>
               </div>);
     }
   });
@@ -140,7 +149,9 @@ var title = "Recent Changes";
 
 // ReactDOM.render(React.createElement(App), document.body);
 // ReactDOM.render(<JSXApp title={title} headings={headings} data={data} />, document.body);
-ReactDOM.render(<ComponentApp title={title} headings={headings} changeSets={data}/>, document.getElementById('container'));
+
+var props = {title: title, headings:headings, changeSets:data}
+ReactDOM.render(<ComponentApp {...props}/>, document.getElementById('container'));
 
 
 console.log("...Ending the tutorial");
