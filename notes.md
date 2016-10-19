@@ -52,10 +52,27 @@ finally also it highlighted that react has been split into two modules:
 - also: as jsx based on xml, can have self closing tags (see above). all tags must be closed.
 - if you put components into another one they appear in this.props.children `<Custom1><CustomChild1/><CustomChild2></Custom1>` 
 - You can name space components this way: Custom1.CustomChild1 = React.createClass, etc
-- Can use ... operator to unpack objects as attributes in tags eg `var props = {a:1, b:2}` then `<Custom {...props}>`. These are called spread attributes and are ES6 standard
-- 
+- Can use `...` operator to unpack objects as attributes in tags eg `var props = {a:1, b:2}` then `<Custom {...props}>`. These are called spread attributes and are ES6 standard
+- Since React is in charge of dealing with the tree and sister tags can be muddled around (sorting etc) if rendering an array, it is always a good idea to give each item in th earray a prop key={something unique in list}. You'll get a warning otherwise...
+- A component is the owner of a child component if that child gets created in the render method of the parent. Also component should not mutate its props. They should always be consistent with what the parent has set. You can validate but not change
 
-##UP TO: 2.9 Styles in JSX [here](https://www.safaribooksonline.com/library/view/reactjs-by-example/9781785289644/ch01s05.htmlb)
+###Props, PropTypes & State
+- although components should not mutate their props, and should be consistent with the parent, you can check the incoming props with propTypes!
+- can here validate, either by specifying type with `React.PropTypes`, or even a function with specific signiature `function(props, propName, componentName)`
+- you can also make default props using the `getDefaultProps`, as an attribute next to `render` and `propTypes` which should map to an anonymous function returning a props object. If these props are missing they will be filled in (existing ones will not be overwritten)
+- React also captures all children between opening & closing tags and puts into props as `props.children`
+- State is different to props. Props are passed down from parent upon initialization. State can change. We aim to do this sparingly, and will earn more about it in a bit
+- Can set the initial state of the app by setting the `getInitialState` function, much like 'getDefaultProps'. 
+- State of a component can be accessed by using `this.state`
+- State of a component can be changed/set to a new state using the `this.setState()`
+- Avoid state as much as possible, as it triggers a rerender. Instead use props, especially if static data. If dynamic, may need state.
+- Props v State:
+    + Props are immutable. Should not be updated by component to which passed, and they are owned by component that DOES the passing
+    + State is internal and private to component. Can and will change depening on interactions with outer world
+    + State should store v v simple data (input is checkoed or a css class shown)
+    + Do not duplicate props in state!! Avoid state as much as poss!!
+ 
+##UP TO: 3.10 Component life cycle overview [here](https://www.safaribooksonline.com/library/view/reactjs-by-example/9781785289644/ch03s10.html)
 
 
 
