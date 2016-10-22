@@ -114,6 +114,76 @@ var Title = React.createClass(
     }
   });
 
+var StateExampleApp = React.createClass(
+  {
+    componentWillMount: function()
+    {
+      // triggered when the component is first loaded into DOM
+      // CAN call set state, but will not trigger a rerender
+      console.log("componentWillMount");
+    },
+
+    componentDidMount: function()
+    {
+      // triggered after first time component loaded (and rendered) into DOM
+      console.log("componentDidMount");
+    },
+
+    componentWillReceiveProps: function(nextProps)
+    //UP TO HERE "We are only left with componentWillReceiveProps."
+    {
+      console.log('componentWillReceiveProps');
+    },
+
+    shouldComponentUpdate: function(nextProps, nextState)
+    {
+      // called when state changes
+      // can also compare nextProps and nextState to existing values and decide
+      // returning true here triggers a render. default is true
+      // you cant setState here 
+      console.log('shouldComponentUpdate');
+      return true;
+    },
+
+    componentWillUpdate: function()
+    { 
+      console.log('componentWillUpdate');
+    },
+
+    getInitialState: function()
+    {
+      console.log('getInitialState');
+      return { status: true};
+    },
+
+    getDefaultProps: function()
+    {
+      console.log('getDefaultProps')
+      return {name:'John'};
+    },
+
+    render: function()
+    {
+      console.log('render');
+      return(   <h1 onClick={this.toggleState}>
+                  {this.state.status.toString()}
+                </h1>);
+    },
+
+    componentWillUnmount: function()
+    {
+      console.log('componentWillUnmount');
+    },
+
+    toggleState: function()
+    {
+      // as this function affects this.state, normally triggers a rerender
+      // however specifically it calls shouldComponentUpdate, and by default returns true
+      console.log('toggleState');
+      this.setState({status: !this.state.status});
+    }
+
+  });
 
 var ComponentApp = React.createClass(
   {
@@ -187,8 +257,8 @@ var title = "Recent Changes";
 // ReactDOM.render(<JSXApp title={title} headings={headings} data={data} />, document.body);
 
 var props = {title: title, headings:headings, changeSets:data}
-ReactDOM.render(<ComponentApp {...props}/>, document.getElementById('container'));
-
+// ReactDOM.render(<ComponentApp {...props}/>, document.getElementById('container'));
+ReactDOM.render(<StateExampleApp name='Jane'/>, document.body)
 
 console.log("...Ending the tutorial");
 })()
